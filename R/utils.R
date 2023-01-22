@@ -1,6 +1,6 @@
 # utils.R
 
-#' Values Not In
+#' Values not in
 #'
 #' This returns the negation of `%in%`.
 #'
