@@ -4,25 +4,29 @@
 setClass(
   "Assay",
   slots = c(
-    raw = "list"
-  ),
-  prototype = list(
-    raw = data.frame()
+    raw = "list",
+    model = "function"
   )
+  # prototype = list(
+  #   raw = data.frame(),
+  #   model =
+  # )
 )
 
-Assay <- function(df) {
+Assay <- function(df, model = \(x) stats::lm(conc ~ value, data = x)) {
   methods::new(
     "Assay",
-    raw = df
+    raw = df,
+    model = model
   )
 }
 
 setMethod(
   "initialize",
   "Assay",
-  function(.Object, raw) {
+  function(.Object, raw, model) {
     .Object@raw <- raw
+    .Object@model <- model
 
     methods::validObject(.Object)
     .Object
