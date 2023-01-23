@@ -5,7 +5,8 @@ setClass(
   "Assay",
   slots = c(
     raw = "list",
-    model = "function"
+    model = "function",
+    fit = "ANY"
   )
   # prototype = list(
   #   raw = data.frame(),
@@ -27,6 +28,7 @@ setMethod(
   function(.Object, raw, model) {
     .Object@raw <- raw
     .Object@model <- model
+    .Object@fit <- model(raw)
 
     methods::validObject(.Object)
     .Object
@@ -39,6 +41,7 @@ methods::setValidity(
     msg <- NULL
 
     raw <- object@raw
+    fit <- object@fit
 
     # data frame
     if ("conc" %nin% names(raw)) {
@@ -46,6 +49,11 @@ methods::setValidity(
     }
     if ("value" %nin% names(raw)) {
       msg <- c(msg, "Data must contain a column named 'value'")
+    }
+
+    # fit
+    if (length(intersect(class(fit), c("lm", "rlm"))) == 0) {
+      msg <- c(msg, "Model must use: stats::lm, MASS::rlm")
     }
 
     if (is.null(msg)) TRUE else msg
