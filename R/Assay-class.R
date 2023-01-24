@@ -4,7 +4,7 @@
 setClass(
   "Assay",
   slots = c(
-    raw = "list",
+    raw = "data.frame",
     model = "function",
     fit = "ANY"
   )
