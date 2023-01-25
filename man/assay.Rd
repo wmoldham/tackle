@@ -3,20 +3,23 @@
 \docType{data}
 \name{assay}
 \alias{assay}
-\title{Assay Data for Interpolation}
+\title{Assay data for interpolation}
 \format{
+An object of class \code{data.frame} with 9 rows and 4 columns.
+}
+\usage{
+assay
+}
+\description{
+A toy data set formatted for interpolation of sample concentrations from a
+standard curve.
+}
+\details{
 \describe{
 \item{id}{sample ID}
 \item{sample}{sample descriptors}
 \item{conc}{concentration of standards}
 \item{value}{assay result}
 }
-}
-\usage{
-assay
-}
-\description{
-A toy dataset formatted for interpolation of sample concentrations from a
-standard curve.
 }
 \keyword{datasets}
