@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{\%nin\%}
 \alias{\%nin\%}
-\title{Values Not In}
+\title{Values not in}
 \usage{
 x \%nin\% table
 }

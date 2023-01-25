@@ -20,3 +20,12 @@ BugReports: https://github.com/wmoldham/tackle/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Imports: 
+    ggplot2,
+    methods,
+    polynom,
+    rlang,
+    stats

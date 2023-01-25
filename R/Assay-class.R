@@ -16,6 +16,25 @@ setClass(
   )
 )
 
+#' Assay constructor
+#'
+#' `Assay` is an S4 container for interpolating sample values from a standard
+#' curve. When provided a data frame (`df`) containing one row for each
+#' measurement and a `model` function for the relationship, unknown values are
+#' interpolated from the standard curve. The standard curve can be evaluated using
+#' `plot` and the interpolated values are returned as a data frame using `results`.
+#'
+#' @param df A `data.frame` containing one row of values for each sample.
+#' @param model A `function` describing the relationship between assay values and
+#'     standards.
+#'
+#' @export
+#' @name Assay-class
+#' @aliases Assay Assay-class results
+#'
+#' @examples
+#' (x <- Assay(assay, model = \(x) stats::lm(value ~ conc, data = x)))
+#'
 Assay <- function(df, model = \(x) stats::lm(value ~ conc, data = x)) {
   methods::new(
     "Assay",
@@ -89,7 +108,7 @@ setMethod(
     standards <- length(object@standards)
     samples <- length(object@samples)
     cat(
-      is(object)[[1]], ":\n",
+      methods::is(object)[[1]], ":\n",
       "- Standards = ", standards, "\n",
       "- Samples   = ", samples, "\n",
       "- Formula   = ", deparse(object@fit$call), "\n",
@@ -100,9 +119,20 @@ setMethod(
   }
 )
 
+#' Plot method for Assay objects
+#'
+#' @param x An Assay object.
+#' @param samples Should interpolated sample values be included on the standard curve?
+#'
+#' @export
+#' @rdname Assay-class
+#'
+#' @examples
+#' plot(x, samples = TRUE)
+#'
 setMethod(
   "plot",
-  signature = c(x = "Assay"),
+  signature = c(x = "Assay", y = "missing"),
   function(x, samples = TRUE) {
     p <-
       ggplot2::ggplot(x@clean) +
@@ -137,6 +167,17 @@ setMethod(
 
 setGeneric("results", function(x, ...) methods::standardGeneric("results"))
 
+#' Results method for Assay objects
+#'
+#' @param x An Assay object.
+#' @param standards Should the standards be returned with the results?
+#'
+#' @export
+#' @rdname Assay-class
+#'
+#' @examples
+#' results(x, standards = TRUE)
+#'
 setMethod(
   "results",
   signature = c(x = "Assay"),
