@@ -101,11 +101,50 @@ setMethod(
 )
 
 setMethod(
-  "print",
-  "Assay",
-  function(x, y, ...) {
-    x@clean |>
-      dplyr::filter()
-    ggplot2::ggplot()
+  "plot",
+  signature = c(x = "Assay"),
+  function(x, samples = TRUE) {
+    p <-
+      ggplot2::ggplot(x@clean) +
+      ggplot2::aes(
+        x = !!rlang::sym(x@x_col),
+        y = !!rlang::sym(x@y_col)
+      ) +
+      ggplot2::geom_function(
+        fun = as.function(polynom::polynomial(stats::coefficients(x@fit))),
+        color = "cornflowerblue",
+        linewidth = 1
+      ) +
+      ggplot2::geom_point(
+        data = x@clean[x@standards, ],
+        shape = 16,
+        size = 3
+      ) +
+      ggplot2::theme_minimal()
+
+    if (samples) {
+      p +
+        ggplot2::geom_point(
+          data = x@clean[x@samples, ],
+          shape = 1,
+          size = 3
+        )
+    } else {
+      p
+    }
+  }
+)
+
+setGeneric("results", function(x, ...) methods::standardGeneric("results"))
+
+setMethod(
+  "results",
+  signature = c(x = "Assay"),
+  function(x, standards = FALSE) {
+    if (!standards) {
+      x@clean[x@samples, ]
+    } else if (standards) {
+      x@clean
+    }
   }
 )
