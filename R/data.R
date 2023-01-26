@@ -1,11 +1,11 @@
 # data.R
 
-#' Assay Data for Interpolation
+#' Assay data for interpolation
 #'
-#' A toy dataset formatted for interpolation of sample concentrations from a
+#' A toy data set formatted for interpolation of sample concentrations from a
 #' standard curve.
 #'
-#' @format
+#' @details
 #' \describe{
 #'   \item{id}{sample ID}
 #'   \item{sample}{sample descriptors}
@@ -14,3 +14,10 @@
 #' }
 #'
 "assay"
+
+#' An example SummarizedExperiment
+#'
+#' A toy data set.
+#'
+"se"
+
