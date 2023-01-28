@@ -34,3 +34,10 @@ Imports:
     tibble,
     tidyr,
     tidyselect
+Collate: 
+    'Assay-class.R'
+    'as_tibble.R'
+    'as_SummarizedExperiment.R'
+    'data.R'
+    'tackle-package.R'
+    'utils.R'
