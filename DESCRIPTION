@@ -27,6 +27,7 @@ Imports:
     dplyr,
     ggplot2,
     methods,
+    missForest,
     polynom,
     rlang,
     stats,
@@ -39,5 +40,6 @@ Collate:
     'as_tibble.R'
     'as_SummarizedExperiment.R'
     'data.R'
+    'metabolomics.R'
     'tackle-package.R'
     'utils.R'
