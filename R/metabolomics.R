@@ -41,7 +41,8 @@ rm_missing <- function(x, group = NULL, frac = 0.2) {
     dplyr::mutate(missing = sum(is.na(!!assay_nm)) / dplyr::n()) |>
     dplyr::group_by(.data$f.id) |>
     dplyr::filter(!all(missing >= frac)) |>
-    dplyr::select(-"missing")
+    dplyr::select(-"missing") |>
+    dplyr::ungroup()
 }
 
 #' Impute missing values using random forest

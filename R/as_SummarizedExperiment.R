@@ -30,6 +30,7 @@ as_SummarizedExperiment <- function(tbl) {
 #' as_SummarizedExperiment(tbl)
 #'
 as_SummarizedExperiment.tbl_df <- function(tbl) {
+  tbl <- dplyr::ungroup(tbl)
   col_names <- names(tbl)
   feature_nms <- col_names[grep("f\\.", col_names)]
   sample_nms <- col_names[grep("s\\.", col_names)]
