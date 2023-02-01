@@ -26,6 +26,7 @@ LazyData: true
 Imports: 
     dplyr,
     ggplot2,
+    imputeLCMD,
     methods,
     missForest,
     polynom,

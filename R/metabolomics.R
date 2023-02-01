@@ -69,6 +69,31 @@ impute_rf <- function(se) {
   se
 }
 
+#' Impute missing values using QRILC
+#'
+#' This method is designed to impute missing values from left-censored data, such
+#' as targeted metabolomics data where missingness is more likely related to
+#' low signal intensities.
+#'
+#' @param se A SummarizedExperiment object.
+#'
+#' @return A SummarizedExperiment object without missing assay values.
+#' @export
+#'
+#' @examples
+#' se <- impute_qrilc(se)
+#'
+impute_qrilc <- function(se) {
+  set.seed(42)
+  assay <-
+    SummarizedExperiment::assay(se) |>
+    log()
+  SummarizedExperiment::assay(se) <-
+    imputeLCMD::impute.QRILC(assay)[[1]] |>
+    exp()
+  se
+}
+
 
 #' Normalize using probabilistic quotient normalization
 #'
