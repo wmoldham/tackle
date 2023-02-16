@@ -29,6 +29,7 @@ Imports:
     methods,
     missForest,
     polynom,
+    readxl,
     rlang,
     stats,
     SummarizedExperiment,
@@ -41,5 +42,6 @@ Collate:
     'as_SummarizedExperiment.R'
     'data.R'
     'metabolomics.R'
+    'normalize.R'
     'tackle-package.R'
     'utils.R'
