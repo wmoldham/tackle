@@ -81,7 +81,7 @@ methods::setValidity(
 
 interpolate <- function(raw, fit, standards, samples, x_col, y_col) {
   p <- polynom::polynomial(stats::coefficients(fit))
-  new_y <- as.list(raw[samples, y_col])
+  new_y <- unlist(as.list(raw[samples, y_col]), use.names = FALSE)
   new_x <- unlist(
     lapply(new_y, \(y) {
       roots <- solve(p, y)
